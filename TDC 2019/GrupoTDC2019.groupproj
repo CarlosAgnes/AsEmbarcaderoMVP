@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{FFC30BD5-743D-4C12-9FA1-5F24E923B822}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="principal\TDC2019.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="serverteste\serverteste.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="TDC2019">
+        <MSBuild Projects="principal\TDC2019.dproj"/>
+    </Target>
+    <Target Name="TDC2019:Clean">
+        <MSBuild Projects="principal\TDC2019.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TDC2019:Make">
+        <MSBuild Projects="principal\TDC2019.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="serverteste">
+        <MSBuild Projects="serverteste\serverteste.dproj"/>
+    </Target>
+    <Target Name="serverteste:Clean">
+        <MSBuild Projects="serverteste\serverteste.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="serverteste:Make">
+        <MSBuild Projects="serverteste\serverteste.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="TDC2019;serverteste"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="TDC2019:Clean;serverteste:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="TDC2019:Make;serverteste:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
